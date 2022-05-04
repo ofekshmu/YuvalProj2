@@ -39,4 +39,16 @@ paths <- all_simple_paths(g,
 downTime_vec <- Generate_DownTime(teta = 0.02)
 x_vec <- GetXVector(downTime_vec)
 
-print(x_vec)
+#Now, We should try to determine if our graph system is working properly -
+# meaning... there is a simple path from A to J with the weight of 0!
+#Let's use x_vec as the graph weights
+
+E(g)$weight <- x_vec
+paths <- all_simple_paths(g,
+                          'A',
+                          'J', mode = c("out"))
+
+paths[[2]]
+edges <- E(g)
+E(g)$weight
+edge_attr(g, index = paths[[2]])
